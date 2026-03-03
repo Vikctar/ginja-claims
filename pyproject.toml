@@ -8,6 +8,7 @@ dependencies = [
     "fastapi>=0.135.1",
     "pytest>=9.0.2",
     "ruff>=0.15.4",
+    "sqlalchemy>=2.0.48",
     "tox>=4.47.2",
     "uvicorn>=0.41.0",
 ]
