@@ -1,7 +1,7 @@
 # Ginja Claims  API
+[![build status](https://github.com/Vikctar/ginja-claims/actions/workflows/main.yml/badge.svg)](https://github.com/Vikctar/ginja-claims/actions/workflows/main.yml)
 
 A minimal backend service that validates health insurance claims in real time, checking member eligibility, benefit coverage, and fraud signals.
-[![build status](https://github.com/Vikctar/ginja-claims/actions/workflows/main.yml/badge.svg)](https://github.com/Vikctar/ginja-claims/actions/workflows/main.yml)
 
 ## Architecture Decisions
 
