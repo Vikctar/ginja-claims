@@ -12,7 +12,7 @@ class ClaimRequest(BaseModel):
     claim_amount: float = Field(..., gt=0, json_schema_extra={"example": 50000})
 
 class ClaimResponse(BaseModel):
-    claim: str
+    claim_id: str
     status: str
     fraud_flag: bool
     approved_amount: float

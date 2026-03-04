@@ -6,6 +6,7 @@ requires-python = ">=3.13"
 dependencies = [
     "bandit>=1.9.4",
     "fastapi>=0.135.1",
+    "httpx>=0.28.1",
     "pytest>=9.0.2",
     "ruff>=0.15.4",
     "sqlalchemy>=2.0.48",
