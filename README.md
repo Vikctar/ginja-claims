@@ -158,3 +158,18 @@ curl http://localhost:8000/claims/C1A2B3C4
 | P001 — General Consultation | 25,000 | 40,000 |
 | P002 — Lab Work (Blood Panel) | 15,000 | 30,000 |
 | P003 — X-Ray | 20,000 | 50,000 |
+
+---
+
+## What I Would Improve for Production
+
+1. **Database**: Swap SQLite for PostgreSQL with connection pooling (asyncpg + SQLAlchemy async).
+2. **Authentication**: API key or JWT middleware. Rate limiting per provider.
+3. **Async processing**: Queue large batch claims (Celery/Redis) instead of synchronous processing.
+4. **Audit trail**: Immutable claim history table — never update, only append state changes.
+5. **Fraud engine**: ML-based scoring instead of a simple threshold rule. Track provider claim patterns.
+6. **Observability**: Structured logging (JSON), Prometheus metrics, distributed tracing.
+7. **CI/CD**: Improved GitHub Actions pipeline with build and deploy stages.
+8. **Config management**: Environment-based config (Pydantic Settings), secrets via vault.
+9. **Data validation**: ICD-10 diagnosis code validation, CPT procedure code lookup.
+10. **Idempotency**: Prevent duplicate claim submissions via idempotency keys.
