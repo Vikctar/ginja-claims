@@ -1,0 +1,40 @@
+-- PostgreSQL Schema
+
+CREATE TABLE members (
+    member_id   VARCHAR(20) PRIMARY KEY,
+    name        VARCHAR(100) NOT NULL,
+    status      VARCHAR(10) NOT NULL CHECK (status IN ('active', 'inactive')),
+    plan_type   VARCHAR(20) NOT NULL DEFAULT 'basic',
+    created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE providers (
+    provider_id VARCHAR(20) PRIMARY KEY,
+    name        VARCHAR(100) NOT NULL,
+    facility    VARCHAR(50) NOT NULL,
+    created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE procedures (
+    procedure_code VARCHAR(20) PRIMARY KEY,
+    name           VARCHAR(100) NOT NULL,
+    average_cost   NUMERIC(12,2) NOT NULL,
+    benefit_limit  NUMERIC(12,2) NOT NULL
+);
+
+CREATE TABLE claims (
+    claim_id        VARCHAR(20) PRIMARY KEY,
+    member_id       VARCHAR(20) NOT NULL REFERENCES members(member_id),
+    provider_id     VARCHAR(20) NOT NULL REFERENCES providers(provider_id),
+    diagnosis_code  VARCHAR(20) NOT NULL,
+    procedure_code  VARCHAR(20) NOT NULL REFERENCES procedures(procedure_code),
+    claim_amount    NUMERIC(12,2) NOT NULL,
+    approved_amount NUMERIC(12,2),
+    status          VARCHAR(10) NOT NULL CHECK (status IN ('APPROVED', 'PARTIAL', 'REJECTED')),
+    fraud_flag      BOOLEAN DEFAULT FALSE,
+    rejection_reasons TEXT[],            -- PostgreSQL array type
+    created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX idx_claims_member ON claims(member_id);
+CREATE INDEX idx_claims_status ON claims(status);
